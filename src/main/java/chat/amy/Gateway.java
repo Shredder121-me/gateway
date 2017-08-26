@@ -36,7 +36,7 @@ public class Gateway {
         heartbeatCheckerService.startAsync();
         // Set up gateway message proxy
         Noelia.flow()
-                .check(message -> message.getTopic().startsWith("gateway:"))
+                .check(message -> message.getTopic().startsWith("gateway-proxy:"))
                 .accept(message -> {
                     final String[] topics = message.getTopic().split(":", 3);
                     final String proxyTarget = topics[1];
@@ -44,6 +44,8 @@ public class Gateway {
                     return ImmutableMap.of(proxyTarget, Collections.singletonList(new NoeliaMessage(proxyTarget, topics[2], message.getData())));
                 })
                 .subscribe();
+        // Actual gateway messages
+        
         // Start accepting heartbeats
         Noelia.flow()
                 .check(new HeartbeatPredicate())
