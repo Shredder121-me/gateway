@@ -4,9 +4,12 @@ import com.google.common.util.concurrent.AbstractScheduledService;
 
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
+ * Service to check for heartbeat deaths once a second
+ *
  * @author amy
  * @since 8/26/17.
  */
@@ -30,6 +33,6 @@ public class HeartbeatCheckerService extends AbstractScheduledService {
     
     @Override
     protected Scheduler scheduler() {
-        return null;
+        return Scheduler.newFixedRateSchedule(0, 1000, TimeUnit.MILLISECONDS);
     }
 }
