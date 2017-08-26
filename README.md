@@ -10,6 +10,8 @@ Messages sent inside the system are meant to be proxied through the gateway; thi
 
 ## Ops
 
+(This section is totally inspired by how Discord's API works)
+
 Messages that originate from the gateway have a code, or "op," that uniquely identifies what kind of message it is. For instance, a "reboot service" op would be different from a "identify" op.
 
 The gateway supports the following ops:
@@ -20,6 +22,8 @@ The gateway supports the following ops:
 | 1       | SHUTDOWN      | The opcode that tells a service to shut down. Should only be sent by the gateway. |
 | 2       | REBOOT        | The opcode that tells a service to reboot. Should only be sent by the gateway. |
 | 10      | SHARD_CONNECT | A Discord-specific opcode that is sent when a bot shard connects to the gateway. Used to determine how the bot should shard. |
+
+Opcode messages should be sent with the topic `gateway:opcode`. 
 
 ## Gateway proxy
 

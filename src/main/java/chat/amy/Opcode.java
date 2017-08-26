@@ -23,4 +23,21 @@ public enum Opcode {
     Opcode(final int opcodeId) {
         this.opcodeId = opcodeId;
     }
+    
+    public static Opcode getOpcodeByValue(final int value) {
+        for(final Opcode opcode : values()) {
+            if(opcode.opcodeId == value) {
+                return opcode;
+            }
+        }
+        return null;
+    }
+    
+    public static Opcode getOpcodeByValue(final String value) {
+        try {
+            return getOpcodeByValue(Integer.parseInt(value));
+        } catch(final NumberFormatException e) {
+            return null;
+        }
+    }
 }
