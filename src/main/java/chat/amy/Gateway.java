@@ -1,10 +1,12 @@
 package chat.amy;
 
 import chat.amy.noelia.Noelia;
+import chat.amy.noelia.message.NoeliaMessage;
 import chat.amy.noelia.message.util.heartbeat.HeartbeatPredicate;
 import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -36,8 +38,10 @@ public class Gateway {
         Noelia.flow()
                 .check(message -> message.getTopic().startsWith("gateway:"))
                 .accept(message -> {
-                    // TODO: Routing
-                    return ImmutableMap.of();
+                    final String[] topics = message.getTopic().split(":", 3);
+                    final String proxyTarget = topics[1];
+                    
+                    return ImmutableMap.of(proxyTarget, Collections.singletonList(new NoeliaMessage(proxyTarget, topics[2], message.getData())));
                 })
                 .subscribe();
         // Start accepting heartbeats
