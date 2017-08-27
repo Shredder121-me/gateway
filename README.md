@@ -37,6 +37,7 @@ Opcode messages should look like the following:
     }
 }
 ```
+but are otherwise plain noelia messages. 
 
 ## Gateway proxy
 
