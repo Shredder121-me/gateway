@@ -10,7 +10,7 @@ public enum Opcode {
     /*
      * Generic opcodes
      */
-    IDENTIFY(0), SHUTDOWN(1), REBOOT(2),
+    IDENTIFY(0), ACCEPT(1), REJECT(2), SHUTDOWN(3), REBOOT(4),
     
     /*
      * Discord-specific opcodes
