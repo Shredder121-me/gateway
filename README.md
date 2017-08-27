@@ -22,8 +22,21 @@ The gateway supports the following ops:
 | 1       | SHUTDOWN      | The opcode that tells a service to shut down. Should only be sent by the gateway. |
 | 2       | REBOOT        | The opcode that tells a service to reboot. Should only be sent by the gateway. |
 | 10      | SHARD_CONNECT | A Discord-specific opcode that is sent when a bot shard connects to the gateway. Used to determine how the bot should shard. |
+| 11      | SHARD_ACCEPT  | A Discord-specific opcode that tells a shard that it's accepted, and what shard ID / how many shards it's to use when connecting to Discord's API. |
+| 12      | SHARD_REJECT  | A Discord-specific opcode that tells the connecting shard "heck off, we don't need you around here." |
 
-Opcode messages should be sent with the topic `gateway:opcode`. 
+Opcode messages should look like the following:
+
+```javascript
+{
+    "s": "source",
+    "t": "gateway:opcode",
+    "d": {
+        "opcode": "opcode value goes here",
+        // Any other data goes here
+    }
+}
+```
 
 ## Gateway proxy
 
