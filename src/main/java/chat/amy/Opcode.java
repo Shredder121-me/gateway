@@ -15,7 +15,7 @@ public enum Opcode {
     /*
      * Discord-specific opcodes
      */
-    SHARD_CONNECT(10), SHARD_ACCEPT(11), SHARD_REJECT(12);
+    SHARD_CONNECT(10), SHARD_ACCEPT(11), SHARD_DEATH(12);
     
     @Getter
     private final int opcodeId;
