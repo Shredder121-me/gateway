@@ -2,6 +2,8 @@
 
 The software that feeds events to [amybot](https://amy.chat/) services. 
 
+This software is GPLv3 licensed; please read the `LICENSE` file to understand what this means. A short description can be found [here](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)). 
+
 ## How it works
 
 The gateway is designed to work for basically any kind of `Networker` that is defined in [noelia](https://github.com/queer/noelia) or otherwise defined across the system, as long as all services agree on the type of `Networker` being used. For example, you can't create a `WebsocketNetworker` and expect it to work with an `HttpNetworker`.
