@@ -43,6 +43,18 @@ Opcode messages should look like the following:
 ```
 but are otherwise plain noelia messages. 
 
+## Authentication
+
+**NOTE**: This section is not yet implemented.
+
+Services authenticate with the gateway by sending OP 0 IDENTIFY to the `/gateway` endpoint. Based on what the gateway has to say about this, it may send back either OP 1 ACCEPT or OP 2 REJECT. If OP 1 is received, the gateway is willing and able to accept a websocket connection from the client. OP 2 means any of
+
+- The gateway is not accepting more connections
+- The client is already connected to the gateway
+- The gateway has some other reason to not accept a connection
+
+TODO: Auth tokens or some nonsense?
+
 ## Gateway proxy
 
 Messages sent to the gateway are effectively proxied between services; this is done so that, among other things, it is possible to get an accurate evaluation of how many messages pass through the entire system without having to instrument every component.
