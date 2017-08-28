@@ -72,8 +72,6 @@ public class Gateway {
                             }
                         }
                     }
-    
-                    return ImmutableMap.of();
                 })
                 .subscribe();
         // Start accepting heartbeats
@@ -81,7 +79,6 @@ public class Gateway {
                 .check(new HeartbeatPredicate())
                 .accept(message -> {
                     heartbeatTimeTracker.put(message.getSource(), System.currentTimeMillis());
-                    return ImmutableMap.of();
                 })
                 .subscribe();
     }
