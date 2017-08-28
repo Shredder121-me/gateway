@@ -14,7 +14,11 @@ Messages sent inside the system are meant to be proxied through the gateway; thi
 
 (This section is totally inspired by how Discord's API works)
 
-Messages that originate from the gateway have a code, or "op," that uniquely identifies what kind of message it is. For instance, a "reboot service" op would be different from a "identify" op.
+Messages that deal with the gateway have a code, or "op," that uniquely identifies what kind of message it is. For instance, a "reboot service" op would be different from a "identify" op.
+
+All actual gateway messages should have an opcode associated with them; the one exception to this rule is `gateway-proxy:*` messages, as those are simply forwarded to the correct client. The reasoning behind this is that gateway operations have simple mnemonics, as well as just to create a well-defined way of communicating with the gateway no matter what the client is. 
+
+Note that the gateway cannot and will not attempt to discern whether a client is actually what it claims to be. For example, if an arbitrary client sends OP 10 `SHARD_CONNECT`, the gateway will not attempt to make sure that it is actually a shard service, and will - assuming other preconditions are met - allow it to connect and be assigned a shard ID. Due to this, you should not *ever* publicly expose the gateway.  
 
 The gateway supports the following ops:
 
@@ -47,7 +51,7 @@ but are otherwise plain noelia messages.
 
 **NOTE**: This section is not yet implemented.
 
-Services authenticate with the gateway by sending OP 0 IDENTIFY to the `/gateway` endpoint. Based on what the gateway has to say about this, it may send back either OP 1 ACCEPT or OP 2 REJECT. If OP 1 is received, the gateway is willing and able to accept a websocket connection from the client. OP 2 means any of
+Services authenticate with the gateway by sending OP 0 `IDENTIFY` to the `/gateway` endpoint. Based on what the gateway has to say about this, it may send back either OP 1 `ACCEPT` or OP 2 `REJECT`. If OP 1 is received, the gateway is willing and able to accept a websocket connection from the client. OP 2 means any of
 
 - The gateway is not accepting more connections
 - The client is already connected to the gateway
@@ -91,7 +95,7 @@ Basically, the topic is just extended a little bit to make it apparent that the 
 
 The gateway is designed to feed events to services including, but not limited to, the following:
 
-* amybot - the distributed Discord "gateway" that handles sharding the bot and connecting to Discord
+* [queer/discord](https://github.com/queer/discord) - the distributed Discord "gateway" that handles sharding amybot and connecting to Discord
 * TBC...
 
 ## License
