@@ -34,6 +34,9 @@ public class Gateway {
     }
     
     private void startGateway() {
+        // TODO: /gateway auth endpoint
+        // Note: Jetty supports `Upgrade: Websocket`, so we can just run everything on one port and let the internal Jetty server figure it out
+        
         // Start heartbeat checker
         heartbeatCheckerService.startAsync();
         // Set up gateway message proxy
